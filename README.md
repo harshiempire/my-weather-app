@@ -193,9 +193,9 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
       Create a `.env` file in the `weather-monitoring-backend` directory with the following content for **local setup** done with docker or if already present:
 
       ```env
-      MONGODB_URI=mongodb://localhost:27017
-      OPENWEATHERMAP_API_KEY=your_openweathermap_api_key
-      GEMINI_API_KEY=gemini_api_key
+      OPENWEATHER_API_KEY=95e73333b1f491ae8676b1bb9588274a
+      MONGO_URI=mongodb+srv://realadmin:realadmin@cluster0.p3phjsx.mongodb.net/
+      GEMINI_API_KEY=AIzaSyCHBfiXfzFrehhldrjnWQDbBHkyXZEVXaA
       ```
       ---
 
