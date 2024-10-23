@@ -195,6 +195,7 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
       ```env
       MONGODB_URI=mongodb://localhost:27017
       OPENWEATHERMAP_API_KEY=your_openweathermap_api_key
+      GEMINI_API_KEY=gemini_api_key
       ```
       ---
 
