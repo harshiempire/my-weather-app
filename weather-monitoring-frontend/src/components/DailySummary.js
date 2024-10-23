@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import axios from "axios";
-import {
-  Sun,
-  Cloud,
-  CloudRain,
-  Snowflake,
-  Wind,
-} from "lucide-react";
+import { Sun, Cloud, CloudRain, Snowflake, Wind } from "lucide-react";
 import {
   BarChart,
   Bar,
@@ -69,7 +63,10 @@ export default function DailySummary() {
 
   useEffect(() => {
     debouncedFetchSummaries();
-    const intervalId = setInterval(debouncedFetchSummaries, fetchInterval * 60000); // Convert minutes to milliseconds
+    const intervalId = setInterval(
+      debouncedFetchSummaries,
+      fetchInterval * 60000
+    ); // Convert minutes to milliseconds
     return () => {
       clearInterval(intervalId);
       debouncedFetchSummaries.cancel(); // Cancel any pending debounced calls on unmount
@@ -148,9 +145,18 @@ export default function DailySummary() {
   const getGraphData = () => {
     if (!selectedSummary) return [];
 
-    const avgTemp = temperatureUnit === "F" ? convertTemperature(selectedSummary.avgTemp) : selectedSummary.avgTemp;
-    const maxTemp = temperatureUnit === "F" ? convertTemperature(selectedSummary.maxTemp) : selectedSummary.maxTemp;
-    const minTemp = temperatureUnit === "F" ? convertTemperature(selectedSummary.minTemp) : selectedSummary.minTemp;
+    const avgTemp =
+      temperatureUnit === "F"
+        ? convertTemperature(selectedSummary.avgTemp)
+        : selectedSummary.avgTemp;
+    const maxTemp =
+      temperatureUnit === "F"
+        ? convertTemperature(selectedSummary.maxTemp)
+        : selectedSummary.maxTemp;
+    const minTemp =
+      temperatureUnit === "F"
+        ? convertTemperature(selectedSummary.minTemp)
+        : selectedSummary.minTemp;
 
     return [
       {
@@ -253,9 +259,11 @@ export default function DailySummary() {
             <div
               key={`${summary.city}-${summary.date}`}
               onClick={() => handleCardClick(summary)}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-100 dark:hover:bg-gray-700 flex flex-col" // Added flex flex-col here
             >
-              <div className="p-6">
+              <div className="p-6 flex-grow">
+                {" "}
+                {/* Added flex-grow here */}
                 <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
                   {summary.date}
                 </h3>
@@ -285,14 +293,27 @@ export default function DailySummary() {
                     </span>
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400 flex justify-between">
+                    <span>Avg Humidity:</span>
+                    <span className="font-medium text-gray-800 dark:text-gray-200">
+                    {summary.avgHumidity !== undefined && summary.avgHumidity.toFixed(1)}%
+                    </span>
+                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 flex justify-between">
                     <span>Condition:</span>
                     <span className="font-medium text-gray-800 dark:text-gray-200">
                       {summary.dominantCondition}
                     </span>
                   </p>
                 </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 p-3 bg-gray-200 dark:bg-gray-700 rounded">
+                  {summary.summary && summary.summary.length > 0
+                    ? summary.summary
+                    : "No summary found"}
+                </p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-700 px-6 py-4">
+              <div className="bg-gray-50 dark:bg-gray-700 px-6 py-4 mt-auto">
+                {" "}
+                {/* mt-auto ensures it's at the bottom */}
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Last updated: {summary.date}
                 </p>
@@ -327,7 +348,12 @@ export default function DailySummary() {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
 
@@ -350,7 +376,11 @@ export default function DailySummary() {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="Value" fill="#8884d8" name={`Temperature (${temperatureUnit}°)`} />
+                <Bar
+                  dataKey="Value"
+                  fill="#8884d8"
+                  name={`Temperature (${temperatureUnit}°)`}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>

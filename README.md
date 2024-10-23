@@ -91,6 +91,7 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
 ---
 
 ![DailySummaries](./screenshots/Daily%20Weather%20Summary.png)
+![DailySummariesinText](./screenshots/DailySummary%20with%20Gemini%20Summarize.png)
 #### Daily Weather Summary
 
 - Provides a daily summary of weather data, including maximum, minimum, and average temperatures.
@@ -384,6 +385,7 @@ The frontend expects certain API endpoints to fetch weather data. Ensure that yo
 
    - The **Daily Summary** section provides a summarized view of the weather over the past days.
    - Click on any summary card to open a modal with detailed graphs showing temperature metrics.
+   - Getting the Summaries of weather condition using gemini ai
 
 4. **Customize Settings**
 
@@ -568,7 +570,7 @@ The frontend expects certain API endpoints to fetch weather data. Ensure that yo
 Explore functionalities like weather forecasts retrieval and generating summaries based
 on predicted conditions.
 ```
-- 5 Day Forecast is retrived and displayed in the form of a line graph representing temp, feels_like, humidity, wind speed
+- 5 Day Forecast is retrived and displayed in the form of a line graph representing temp, feels_like, humidity, wind speed and generating summaries using gemini ai 
 
 
 
