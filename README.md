@@ -70,7 +70,6 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
 #### Forecast 
 
 - Offers a graphical representation of weather forecasts over the next five days, showing trends in temperature, humidity, and wind speed.
-- Although forecasts aren't explicitly mentioned as part of the initial requirements, this visualization enhances the application's usefulness, showcasing future conditions for better planning.
 ---
 
 ![CitySelection](./screenshots/Selecting%20cities.png)
@@ -108,17 +107,17 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
 
 ### Prerequisites
 
-- **Node.js:**  - Download and install from [https://nodejs.org/](https://nodejs.org/).
+- **Node.js:**
 - **npm:** - Node Package Manager.
-- **Docker:** (for running the MongoDB database) - Download and install from [https://www.docker.com/](https://www.docker.com/).
+- **Docker:** (for running the MongoDB database)
 
 ### Setup Instructions
 
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/weather-dashboard.git
-   cd weather-dashboard
+   git clone https://github.com/harshiempire/my-weather-app.git
+   cd my-weather-app
    ```
 
 2. **Start the MongoDB Database using Docker**
@@ -132,6 +131,15 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
    - Pull the MongoDB image from Docker Hub.
    - Run MongoDB in detached mode (`-d`), mapping the container's port 27017 to your local machine's port 27017.
    - Name the container `mongo-weather` for easy reference.
+
+   #### OR 
+
+   * If setting using Docker is a hassle, in the `.env.example`, I have provided the MongoDB Atlas URI where the username and password `realadmin`
+   * `mongodb+srv://username:passwrod@cluster0.p3phjsx.mongodb.net/`
+- Also provided the `OPENWEATHERMAP API` for easier setup
+- Don't forget to create `.env` or else the setup wouldn't work
+
+
 
 3. **Backend Setup**
 
@@ -149,15 +157,24 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
 
    c. **Configure Backend Environment Variables**
 
-      Create a `.env` file in the `weather-monitoring-backend` directory with the following content:
+      Create a `.env` file in the `weather-monitoring-backend` directory with the following content for **local setup**:
 
       ```env
       MONGODB_URI=mongodb://localhost:27017
       OPENWEATHERMAP_API_KEY=your_openweathermap_api_key
       ```
+      ---
+
+      For easier and **cloud setup** of `MONOGODB`
+
+      ```env
+      MONGODB_URI=mongodb+srv://username:passwrod@cluster0.p3phjsx.mongodb.net/
+      OPENWEATHERMAP_API_KEY=your_openweathermap_api_key
+      ```
 
       - Replace `your_openweathermap_api_key` with your actual OpenWeatherMap API key (get one from [https://openweathermap.org/api](https://openweathermap.org/api)).
       - Ensure that `MONGODB_URI` points to the MongoDB instance you started with Docker.
+      - Replace Cloud setup env file with realadmin as username and password
 
    d. **Start the Backend Server**
 
@@ -183,17 +200,8 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
       npm install
       ```
 
-   c. **Configure Frontend Environment Variables**
 
-      Create a `.env` file in the `weather-monitoring-frontend` directory with the following content:
-
-      ```env
-      REACT_APP_API_BASE_URL=http://localhost:5000/api
-      ```
-
-      Ensure that `REACT_APP_API_BASE_URL` matches the backend server's API endpoint.
-
-   d. **Start the Frontend Application**
+   c. **Start the Frontend Application**
 
       ```bash
       npm start
@@ -253,14 +261,71 @@ The frontend expects certain API endpoints to fetch weather data. Ensure that yo
      ```json
      [
        {
+         "_id": "67188216560e008def4d4a1a",
          "city": "Delhi",
-         "date": "2024-04-27",
-         "avgTemp": 28.5,
-         "maxTemp": 32.0,
-         "minTemp": 24.0,
-         "dominantCondition": "Clear"
+         "date": "2024-10-23",
+         "temperatures": [
+               28.06,
+               28.06,
+               28.06,
+               29.06,
+               29.06,
+               29.06,
+               29.06
+         ],
+         "conditions": [
+               "Haze",
+               "Haze",
+               "Haze",
+               "Haze",
+               "Haze",
+               "Haze",
+               "Haze"
+         ],
+         "avgTemp": 28.631428571428568,
+         "maxTemp": 29.06,
+         "minTemp": 28.06,
+         "dominantCondition": "Haze",
+         "__v": 6
        },
        // ... other summaries
+     ]
+     ```
+3. **Forecast**
+
+   - **Endpoint**: `/api/weather/forecast`
+   - **Method**: `GET`
+   - **Query Parameters**:
+     - `city` (string) - Name of the city (e.g., `Delhi`)
+   - **Sample Request**:
+
+     ```
+     GET /api/weather/summary?city=Delhi
+     ```
+
+   - **Sample Response**:
+
+     ```json
+     [
+       {
+         "dt": "2024-10-23T18:00:00.000Z",
+         "temp": 27.94,
+         "feels_like": 26.68,
+         "temp_min": 27.94,
+         "temp_max": 27.94,
+         "pressure": 1011,
+         "humidity": 19,
+         "main": "Clear",
+         "description": "clear sky",
+         "icon": "01n",
+         "wind_speed": 2.15,
+         "wind_deg": 336,
+         "pop": 0,
+         "rain": 0,
+         "dt_txt": "2024-10-23 18:00:00",
+         "_id": "67188a88c791fb77e280fe67",
+        }
+       // ... other dates forecast
      ]
      ```
 
@@ -304,85 +369,96 @@ The frontend expects certain API endpoints to fetch weather data. Ensure that yo
 .
 ├── README.md
 ├── screenshots
-│   ├── Alert.png
-│   ├── Current Weather.png
-│   ├── Daily Weather Summary.png
-│   ├── ...
+│   ├── Alert.png
+│   ├── Current Weather.png
+│   ├── Daily Weather Summary.png
+│   ├── Forecast.png
+│   ├── Selecting cities.png
+│   ├── Settings.png
+│   ├── Weather Condition.jpg
+│   └── Weather in fahrenheit.png
 ├── weather-monitoring-backend
-│   ├── controllers
-│   │   └── weatherController.js
-│   ├── models
-│   │   ├── DailySummary.js
-│   │   ├── ForecastData.js
-│   │   ├── ...
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── routes
-│   │   |__ api.js
-│   └── server.js
+│   ├── config
+│   │   └── cities.js
+│   ├── controllers
+│   │   └── weatherController.js
+│   ├── models
+│   │   ├── DailySummary.js
+│   │   ├── ForecastData.js
+│   │   └── WeatherData.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── routes
+│   │   └── api.js
+│   ├── server.js
+│   └── services
+│       ├── cronJobs.js
+│       ├── dataFetcher.js
+│       └── updateSummary.js
 └── weather-monitoring-frontend
     ├── README.md
     ├── package-lock.json
     ├── package.json
     ├── public
-    │   ├── favicon.ico
-    │   ├── index.html
-    │   ├── ...
+    │   ├── favicon.ico
+    │   ├── index.html
+    │   ├── logo192.png
+    │   ├── logo512.png
+    │   ├── manifest.json
+    │   └── robots.txt
     ├── src
-    │   ├── App.css
-    │   ├── App.js
-    │   ├── App.test.js
-    │   ├── CityContext.js
-    │   ├── components
-    │   ├── index.css
-    │   ├── index.js
-    │   ├── ...
+    │   ├── App.css
+    │   ├── App.js
+    │   ├── App.test.js
+    │   ├── CityContext.js
+    │   ├── components
+    │   │   ├── CurrentWeather.js
+    │   │   ├── DailySummary.js
+    │   │   ├── ErrorBoundary.js
+    │   │   ├── Forecast.js
+    │   │   ├── Settings.js
+    │   │   └── WeatherDashboard.js
+    │   ├── index.css
+    │   ├── index.js
+    │   ├── logo.svg
+    │   ├── reportWebVitals.js
+    │   └── setupTests.js
     └── tailwind.config.js
 ```
 
 ### Key Directories and Files
 
-- **`src/components/`**: Contains all React components used in the application.
-  - **`CurrentWeather.js`**: Displays current weather data.
-  - **`DailySummary.js`**: Shows daily weather summaries with interactive graphs.
-  - **`Settings.js`**: Allows users to customize preferences.
-  - **`ErrorBoundary.js`**: Catches and handles rendering errors gracefully.
-  
-- **`src/context/CityContext.js`**: Implements React Context for state management across the application.
+#### Frontend
 
-- **`src/hooks/`**: Contains custom React hooks for reusable logic (e.g., data fetching).
+*	`src/components/`: React components used in the application.
+      + `CurrentWeather.js`: Displays current weather data.
+      + `DailySummary.js`: Shows daily weather summaries with interactive graphs.
+      + `Settings.js`: Allows users to customize preferences.
+      + `ErrorBoundary.js`: Handles rendering errors gracefully.
+*	`src/context/CityContext.js`: Implements React Context for state management.
+*	`src/hooks/`: Custom React hooks for reusable logic (e.g., data fetching).
+*	`public/`: Contains the HTML template and static assets.
+*	`.env`: Environment variables for configuration (not committed to version control).
 
-- **`src/assets/screenshots/`**: Stores images and GIFs used in the README and documentation.
+#### Backend
 
-- **`public/`**: Contains the HTML template and static assets.
-
-- **`.env`**: Environment variables for configuration (not committed to version control).
-
-**`controllers/`**: This directory houses the controller functions, which act as the primary handlers for incoming API requests. Each controller is responsible for a specific set of functionalities.
-
-- **`weatherController.js`**: Handles all aspects of weather data retrieval and processing. It acts as the intermediary between external weather services (like OpenWeatherMap) and the application's database. Its responsibilities include:
-    - Fetching Current Weather:  Retrieves real-time weather data for a given city.
-    - Fetching Daily Summaries: Retrieves daily weather summaries, including average, maximum, and minimum temperatures, and dominant weather conditions for each day.
-    - Fetching Forecasts:  Retrieves weather forecasts for a given city.
-
-**`models/`**: Contains Mongoose schemas and models, which define the structure and relationships of the data stored in the MongoDB database.
-
-- **`DailySummary.js`**:  Defines the schema for storing daily weather summaries, including fields like `city`, `date`, `temperatures` (an array of temperatures for the day), `conditions` (an array of weather conditions for the day), `avgTemp`, `maxTemp`, `minTemp`, and `dominantCondition` (the most prevalent weather condition during the day).
-
-- **`ForecastData.js`**:  Defines the schema for storing weather forecast data retrieved from external APIs. It typically stores fields like `city`, `forecastList` (an array of forecast data points for each time interval), and `fetchedAt` (timestamp).
-
-**`routes/`**:  Defines the API endpoints that allow external applications (like the frontend) to interact with the backend. Each route specifies a URL path and links it to a controller function.
-
-- **`api.js`**: The main router file that combines different route modules and applies middleware. It typically includes routes related to weather data, such as `/weather/current`, `/weather/summary`, and `/weather/forecast`.
-
-**`services/`**:  Contains business logic and functions that interact with external APIs or perform complex operations.
-
-- **`weatherService.js`**:  Handles communication with the OpenWeatherMap API. It includes functions for fetching current weather data, daily summaries, and forecasts. This service usually processes and formats the data before passing it to the controllers.
-
-**`server.js`**: The main entry point of the backend application. 
-
-- **Server Setup:** Sets up the Express server and configures middleware, such as `express.json()` for parsing JSON requests and `cors` for handling Cross-Origin Resource Sharing (CORS).
-- **Database Connection:** Connects to the MongoDB database using Mongoose, utilizing the connection string specified in the `.env` file.
+*	`config/`: Configuration files.
+   + `cities.js`: Defines the list of cities to monitor with their coordinates.
+*	`controllers/`: Handles incoming API requests.
+   + `weatherController.js`: Manages weather-related API endpoints.
+*	`models/`: Mongoose schemas and models for MongoDB.
+      + `WeatherData.js`: Schema for current weather data.
+      + `DailySummary.js`: Schema for daily weather summaries.
+      + `ForecastData.js`: Schema for weather forecast data.
+*	`routes/`: Defines API endpoints and associates them with controllers.
+      + `api.js`: Main router file for the API.
+*	`services/`: Business logic and interactions with external APIs.
+      + `dataFetcher.js`: Functions to fetch weather data from external APIs.
+      + `updateSummary.js`: Functions to process and update daily summaries.
+      + `cronJobs.js`: Schedules tasks to fetch data at regular intervals.
+*	`server.js`: Main entry point of the backend application.
+   + Sets up the Express server, connects to MongoDB, initializes middleware, and starts the server.
+   + Imports and starts cron jobs for data fetching.
 
 ## Test Cases:
 1. System Setup:
