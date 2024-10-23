@@ -3,14 +3,46 @@
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Demo](#demo)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
+1. [Overview](#overview)
+2. [Features](#features)
+3. [Technologies Used](#technologies-used)
+4. [Demo](#demo)
+   - [Daily Weather](#daily-weather)
+   - [Daily Weather Summary](#daily-weather-summary)
+   - [Forecast](#forecast)
+   - [City Selection](#city-selection)
+   - [Settings Page](#settings-page)
+   - [Weather in Fahrenheit](#weather-in-fahrenheit)
+   - [Temperature and Weather Based Alerts](#temperature-and-weather-based-alerts)
+5. [Installation](#installation)
+   - [Prerequisites](#prerequisites)
+   - [Setup Instructions](#setup-instructions)
+     1. [Clone the Repository](#1-clone-the-repository)
+     2. [Start the MongoDB Database using Docker](#2-start-the-mongodb-database-using-docker)
+        - [OR](#or)
+     3. [Backend Setup](#3-backend-setup)
+        - [a. Navigate to the Backend Directory](#a-navigate-to-the-backend-directory)
+        - [b. Install Backend Dependencies](#b-install-backend-dependencies)
+        - [c. Configure Backend Environment Variables](#c-configure-backend-environment-variables)
+        - [d. Start the Backend Server](#d-start-the-backend-server)
+     4. [Frontend Setup](#4-frontend-setup)
+        - [a. Navigate to the Frontend Directory](#a-navigate-to-the-frontend-directory)
+        - [b. Install Frontend Dependencies](#b-install-frontend-dependencies)
+        - [c. Start the Frontend Application](#c-start-the-frontend-application)
+     5. [Access the Weather Dashboard](#5-access-the-weather-dashboard)
+6. [Configuration](#configuration)
+   - [API Integration](#api-integration)
+   - [Environment Variables](#environment-variables)
+7. [Usage](#usage)
+8. [Project Structure](#project-structure)
+   - [Frontend](#frontend)
+   - [Backend](#backend)
+9. [Non-Functional Considerations](#non-functional-considerations)
+   - [Security Enhancements](#security-enhancements)
+   - [Performance Optimizations](#performance-optimizations)
+   - [Scalability Considerations](#scalability-considerations)
+10. [Test Cases](#test-cases)
+11. [Bonus](#bonus)
 
 ## Overview
 
@@ -120,7 +152,7 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
    cd my-weather-app
    ```
 
-2. **Start the MongoDB Database using Docker**
+2. **Start the MongoDB Database using Docker (Skip to next step if no docker)**
 
    ```bash
    docker pull mongo
@@ -135,9 +167,9 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
    #### OR 
 
    * If setting using Docker is a hassle, in the `.env.example`, I have provided the MongoDB Atlas URI where the username and password `realadmin`
-   * `mongodb+srv://username:passwrod@cluster0.p3phjsx.mongodb.net/`
-- Also provided the `OPENWEATHERMAP API` for easier setup
-- Don't forget to create `.env` or else the setup wouldn't work
+   * `mongodb+srv://username:passwrod@cluster0.p3phjsx.mongodb.net/` refer step 3. **Backend Setup**
+- Also provided the `OPENWEATHERMAP API` for easier setup 
+- Don't forget to create `.env` or else the setup wouldn't work as in the next step
 
 
 
@@ -157,7 +189,7 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
 
    c. **Configure Backend Environment Variables**
 
-      Create a `.env` file in the `weather-monitoring-backend` directory with the following content for **local setup**:
+      Create a `.env` file in the `weather-monitoring-backend` directory with the following content for **local setup** done with docker or if already present:
 
       ```env
       MONGODB_URI=mongodb://localhost:27017
@@ -165,16 +197,16 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
       ```
       ---
 
-      For easier and **cloud setup** of `MONOGODB`
+      For easier and **cloud setup** of `MONOGODB` (Without Docker)
 
       ```env
       MONGODB_URI=mongodb+srv://username:passwrod@cluster0.p3phjsx.mongodb.net/
       OPENWEATHERMAP_API_KEY=your_openweathermap_api_key
       ```
 
-      - Replace `your_openweathermap_api_key` with your actual OpenWeatherMap API key (get one from [https://openweathermap.org/api](https://openweathermap.org/api)).
+      - Replace `your_openweathermap_api_key` with your actual OpenWeatherMap API key (get one from [https://openweathermap.org/api](https://openweathermap.org/api)) if not provided in the `.env.example`.
       - Ensure that `MONGODB_URI` points to the MongoDB instance you started with Docker.
-      - Replace Cloud setup env file with realadmin as username and password
+      - Replace Cloud setup env file with `realadmin` as username and password
 
    d. **Start the Backend Server**
 
@@ -331,7 +363,8 @@ The frontend expects certain API endpoints to fetch weather data. Ensure that yo
 
 ### Environment Variables
 
-- **`OPENWEATHERMAP_API_KEY`**: (If using OpenWeatherMap) API key for fetching weather data.
+- **`OPENWEATHERMAP_API_KEY`**: API key for fetching weather data.
+- **`MONGO_URI`**: - URI for connecting to the MongoDB database
 
 *Ensure that these variables are correctly set in your `.env` file.*
 
@@ -460,6 +493,28 @@ The frontend expects certain API endpoints to fetch weather data. Ensure that yo
    + Sets up the Express server, connects to MongoDB, initializes middleware, and starts the server.
    + Imports and starts cron jobs for data fetching.
 
+## Non-Functional Considerations
+
+### Security Enhancements
+
+- **Input Validation**: Implement validation on all API endpoints to ensure incoming data conforms to expected formats and types, preventing malicious inputs and injections.
+- **Environment Variables**: Use environment variables to store sensitive information such as API keys and database credentials, ensuring they are not exposed in the codebase or version control.
+- **CORS Configuration**: Configure Cross-Origin Resource Sharing (CORS) policies to restrict API access to trusted origins, enhancing the security of API communications.
+
+### Performance Optimizations
+
+- **Efficient Data Fetching**: Minimize API calls to external services by scheduling data fetching at optimal intervals and storing results in the database for quick retrieval.
+- **Debouncing**: Implement lodash.debounce on the frontend to limit the rate of function execution, reducing unnecessary API calls during rapid user input events.
+- **Resource Management**: Use connection pooling and ensure proper handling of database connections to optimize resource usage.
+
+### Scalability Considerations
+
+- **Modular Architecture**: Adopt a modular code structure, separating concerns into controllers, services, and models, facilitating easier maintenance and scalability.
+- **Stateless Backend**: Design the backend to be stateless, allowing for horizontal scaling through load balancers without session management issues.
+- **Configurable Parameters**: Make key parameters such as the list of monitored cities and data fetch intervals configurable, allowing the system to adapt to different requirements without code changes.
+- **Database Indexing**: Add indexes to frequently queried fields in MongoDB collections to improve read performance and support scaling to larger datasets.
+
+
 ## Test Cases:
 1. System Setup:
 ```bash
@@ -514,5 +569,6 @@ Explore functionalities like weather forecasts retrieval and generating summarie
 on predicted conditions.
 ```
 - 5 Day Forecast is retrived and displayed in the form of a line graph representing temp, feels_like, humidity, wind speed
+
 
 
