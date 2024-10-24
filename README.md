@@ -235,9 +235,11 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
 
    a. **Navigate to the Frontend Directory**
 
+   At weather-app directory
    ```bash
-   cd weather-monitoring-frontend # at weather-app directory
+   cd weather-monitoring-frontend 
    ```
+   At weather-monitoring-backend directory
    ```bash
    cd ../weather-monitoring-frontend # at weather-monitoring-backend directory
    ```
