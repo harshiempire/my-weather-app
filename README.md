@@ -202,7 +202,7 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
       For easier and **cloud setup** of `MONOGODB` (Without Docker)
 
       ```env
-      MONGODB_URI=mongodb+srv://username:passwrod@cluster0.p3phjsx.mongodb.net/
+      MONGODB_URI=mongodb+srv://realadmin:realadmin@cluster0.p3phjsx.mongodb.net/
       OPENWEATHER_API_KEY=95e73333b1f491ae8676b1bb9588274a
       GEMINI_API_KEY=AIzaSyCHBfiXfzFrehhldrjnWQDbBHkyXZEVXaA
 
