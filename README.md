@@ -196,7 +196,7 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
    npm install
    ```
 
-   c. **Configure Backend Environment Variables**
+   c. **Configure Backend Environment Variables** (Step can be **skipped** as added the .env file for convenience)
 
    Create a `.env` file in the `weather-monitoring-backend` directory with the following content for **local setup** done with docker or if already present:
 
