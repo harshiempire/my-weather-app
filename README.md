@@ -231,12 +231,14 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
 
 4. **Frontend Setup**
 
-   Open a new terminal window or tab for the frontend setup.
+   Open a new terminal window or tab for the frontend setup. And navigate to the `weather-app` directory or if at the `weather-monitoring-backend` directory
 
    a. **Navigate to the Frontend Directory**
 
    ```bash
-   cd ../weather-monitoring-frontend
+   cd weather-monitoring-frontend # at weather-app directory
+
+   cd ../weather-monitoring-frontend # at weather-monitoring-backend directory
    ```
 
    b. **Install Frontend Dependencies**
