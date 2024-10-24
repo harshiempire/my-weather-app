@@ -1,6 +1,5 @@
 # Weather Dashboard Application
 
-
 ## Table of Contents
 
 1. [Overview](#overview)
@@ -65,6 +64,7 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
 ## Technologies Used
 
 - **Frontend**:
+
   - React
   - Tailwind CSS
   - React Toastify
@@ -88,53 +88,61 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
 
 - Displays real-time weather data for a selected city. This corresponds to the core function of continuously retrieving and displaying weather conditions from the OpenWeatherMap API.
 - Includes temperature, feels-like temperature, and weather condition, showcasing real-time updates as described in the application objectives.
+
 ---
 
 ![DailySummaries](./screenshots/Daily%20Weather%20Summary.png)
 ![DailySummariesinText](./screenshots/DailySummary%20with%20Gemini%20Summarize.png)
+
 #### Daily Weather Summary
 
 - Provides a daily summary of weather data, including maximum, minimum, and average temperatures.
 - This image reflects the daily rollup and aggregate functionality mentioned in the project, which stores summarized data for further analysis.
+
 ---
 
 ![Forecast](./screenshots/Forecast.png)
 
-#### Forecast 
+#### Forecast
 
 - Offers a graphical representation of weather forecasts over the next five days, showing trends in temperature, humidity, and wind speed.
+
 ---
 
 ![CitySelection](./screenshots/Selecting%20cities.png)
 
 #### City Selection
 
-
 - Allows users to select different metro cities for real-time weather data, which aligns with the requirement to monitor weather for various Indian metros (Delhi, Mumbai, Chennai, etc.).
 - It shows how the system supports tracking weather in multiple locations, as expected from the system’s design.
+
 ---
 
 ![Settings](./screenshots/Settings.png)
 
 #### Settings Page:
+
 - Represents the user-configurable settings where thresholds for alerts, temperature units, and data fetch intervals can be customized.
 - This page ties into the functionality for setting temperature thresholds and adjusting system behavior for real-time data retrieval as outlined in the application objectives.
+
 ---
 
 ![WeatherinFahrenheit](./screenshots/Weather%20in%20fahrenheit.png)
 
 #### Weather in Fahrenheit
+
 - Demonstrates the system’s ability to switch between temperature units (Celsius/Fahrenheit), fulfilling the requirement to convert temperature based on user preferences.
 - Highlights the flexibility of the system in displaying data in different formats.
+
 ---
 
 ![Alert for temperature excedding](./screenshots/Alert.png)
 ![Alert for weather condition](./screenshots/Weather%20Condition.jpg)
 
 #### Temperature and Weather Based Alerts
-- 	Represents the alert system functionality that notifies users when predefined thresholds, such as temperature exceeding a certain value (like 25°C and 32°C for consecutive updates), are breached.
-- The notification provides a simple update about the weather condition in the selected city, reinforcing the continuous weather monitoring aspect of the system.
 
+-     Represents the alert system functionality that notifies users when predefined thresholds, such as temperature exceeding a certain value (like 25°C and 32°C for consecutive updates), are breached.
+- The notification provides a simple update about the weather condition in the selected city, reinforcing the continuous weather monitoring aspect of the system.
 
 ## Installation
 
@@ -161,64 +169,65 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
    ```
 
    This will:
+
    - Pull the MongoDB image from Docker Hub.
    - Run MongoDB in detached mode (`-d`), mapping the container's port 27017 to your local machine's port 27017.
    - Name the container `mongo-weather` for easy reference.
 
-   #### OR 
+   #### OR
 
-   * If setting using Docker is a hassle, in the `.env.example`, I have provided the MongoDB Atlas URI where the username and password `realadmin`
-   * `mongodb+srv://username:passwrod@cluster0.p3phjsx.mongodb.net/` refer step 3. **Backend Setup**
-- Also provided the `OPENWEATHERMAP API` for easier setup 
+   - If setting using Docker is a hassle, in the `.env.example`, I have provided the MongoDB Atlas URI where the username and password `realadmin`
+   - `mongodb+srv://username:passwrod@cluster0.p3phjsx.mongodb.net/` refer step 3. **Backend Setup**
+
+- Also provided the `OPENWEATHERMAP API` for easier setup
 - Don't forget to create `.env` or else the setup wouldn't work as in the next step
-
-
 
 3. **Backend Setup**
 
    a. **Navigate to the Backend Directory**
 
-      ```bash
-      cd weather-monitoring-backend
-      ```
+   ```bash
+   cd weather-monitoring-backend
+   ```
 
    b. **Install Backend Dependencies**
 
-      ```bash
-      npm install
-      ```
+   ```bash
+   npm install
+   ```
 
    c. **Configure Backend Environment Variables**
 
-      Create a `.env` file in the `weather-monitoring-backend` directory with the following content for **local setup** done with docker or if already present:
+   Create a `.env` file in the `weather-monitoring-backend` directory with the following content for **local setup** done with docker or if already present:
 
-      ```env
-      OPENWEATHER_API_KEY=95e73333b1f491ae8676b1bb9588274a
-      MONGO_URI=mongodb://localhost:27017
-      GEMINI_API_KEY=AIzaSyCHBfiXfzFrehhldrjnWQDbBHkyXZEVXaA
-      ```
-      ---
+   ```env
+   OPENWEATHER_API_KEY=95e73333b1f491ae8676b1bb9588274a
+   MONGO_URI=mongodb://localhost:27017
+   GEMINI_API_KEY=AIzaSyCHBfiXfzFrehhldrjnWQDbBHkyXZEVXaA
+   ```
 
-      For easier and **cloud setup** of `MONOGODB` (Without Docker)
+   ***
 
-      ```env
-      MONGODB_URI=mongodb+srv://realadmin:realadmin@cluster0.p3phjsx.mongodb.net/
-      OPENWEATHER_API_KEY=95e73333b1f491ae8676b1bb9588274a
-      GEMINI_API_KEY=AIzaSyCHBfiXfzFrehhldrjnWQDbBHkyXZEVXaA
+   For easier and **cloud setup** of `MONOGODB` (Without Docker)
 
-      ```
+   ```env
+   OPENWEATHER_API_KEY=95e73333b1f491ae8676b1bb9588274a
+   MONGO_URI=mongodb+srv://realadmin:realadmin@cluster0.p3phjsx.mongodb.net/
+   GEMINI_API_KEY=AIzaSyCHBfiXfzFrehhldrjnWQDbBHkyXZEVXaA
 
-      - Replace `your_openweathermap_api_key` with your actual OpenWeatherMap API key (get one from [https://openweathermap.org/api](https://openweathermap.org/api)) if not provided in the `.env.example`.
-      - Ensure that `MONGODB_URI` points to the MongoDB instance you started with Docker.
-      - Replace Cloud setup env file with `realadmin` as username and password
+   ```
+
+   - Replace `your_openweathermap_api_key` with your actual OpenWeatherMap API key (get one from [https://openweathermap.org/api](https://openweathermap.org/api)) if not provided in the `.env.example`.
+   - Ensure that `MONGODB_URI` points to the MongoDB instance you started with Docker.
+   - Replace Cloud setup env file with `realadmin` as username and password
 
    d. **Start the Backend Server**
 
-      ```bash
-      npm start
-      ```
+   ```bash
+   npm start
+   ```
 
-      The backend server will run on `http://localhost:5001`.
+   The backend server will run on `http://localhost:5001`.
 
 4. **Frontend Setup**
 
@@ -226,24 +235,23 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
 
    a. **Navigate to the Frontend Directory**
 
-      ```bash
-      cd ../weather-monitoring-frontend
-      ```
+   ```bash
+   cd ../weather-monitoring-frontend
+   ```
 
    b. **Install Frontend Dependencies**
 
-      ```bash
-      npm install
-      ```
-
+   ```bash
+   npm install
+   ```
 
    c. **Start the Frontend Application**
 
-      ```bash
-      npm start
-      ```
+   ```bash
+   npm start
+   ```
 
-      The frontend application will be accessible at `http://localhost:3000`.
+   The frontend application will be accessible at `http://localhost:3000`.
 
 5. **Access the Weather Dashboard**
 
@@ -300,33 +308,18 @@ The frontend expects certain API endpoints to fetch weather data. Ensure that yo
          "_id": "67188216560e008def4d4a1a",
          "city": "Delhi",
          "date": "2024-10-23",
-         "temperatures": [
-               28.06,
-               28.06,
-               28.06,
-               29.06,
-               29.06,
-               29.06,
-               29.06
-         ],
-         "conditions": [
-               "Haze",
-               "Haze",
-               "Haze",
-               "Haze",
-               "Haze",
-               "Haze",
-               "Haze"
-         ],
+         "temperatures": [28.06, 28.06, 28.06, 29.06, 29.06, 29.06, 29.06],
+         "conditions": ["Haze", "Haze", "Haze", "Haze", "Haze", "Haze", "Haze"],
          "avgTemp": 28.631428571428568,
          "maxTemp": 29.06,
          "minTemp": 28.06,
          "dominantCondition": "Haze",
          "__v": 6
-       },
+       }
        // ... other summaries
      ]
      ```
+
 3. **Forecast**
 
    - **Endpoint**: `/api/weather/forecast`
@@ -359,8 +352,8 @@ The frontend expects certain API endpoints to fetch weather data. Ensure that yo
          "pop": 0,
          "rain": 0,
          "dt_txt": "2024-10-23 18:00:00",
-         "_id": "67188a88c791fb77e280fe67",
-        }
+         "_id": "67188a88c791fb77e280fe67"
+       }
        // ... other dates forecast
      ]
      ```
@@ -370,7 +363,7 @@ The frontend expects certain API endpoints to fetch weather data. Ensure that yo
 - **`OPENWEATHERMAP_API_KEY`**: API key for fetching weather data.
 - **`MONGO_URI`**: - URI for connecting to the MongoDB database
 
-*Ensure that these variables are correctly set in your `.env` file.*
+_Ensure that these variables are correctly set in your `.env` file._
 
 ## Usage
 
@@ -468,35 +461,40 @@ The frontend expects certain API endpoints to fetch weather data. Ensure that yo
 
 #### Frontend
 
-*	`src/components/`: React components used in the application.
-      + `CurrentWeather.js`: Displays current weather data.
-      + `DailySummary.js`: Shows daily weather summaries with interactive graphs.
-      + `Settings.js`: Allows users to customize preferences.
-      + `ErrorBoundary.js`: Handles rendering errors gracefully.
-*	`src/context/CityContext.js`: Implements React Context for state management.
-*	`src/hooks/`: Custom React hooks for reusable logic (e.g., data fetching).
-*	`public/`: Contains the HTML template and static assets.
-*	`.env`: Environment variables for configuration (not committed to version control).
+- `src/components/`: React components used in the application.
+  - `CurrentWeather.js`: Displays current weather data.
+  - `DailySummary.js`: Shows daily weather summaries with interactive graphs.
+  - `Settings.js`: Allows users to customize preferences.
+  - `ErrorBoundary.js`: Handles rendering errors gracefully.
+- `src/context/CityContext.js`: Implements React Context for state management.
+- `src/hooks/`: Custom React hooks for reusable logic (e.g., data fetching).
+- `public/`: Contains the HTML template and static assets.
+- `.env`: Environment variables for configuration (not committed to version control).
 
 #### Backend
 
-*	`config/`: Configuration files.
-   + `cities.js`: Defines the list of cities to monitor with their coordinates.
-*	`controllers/`: Handles incoming API requests.
-   + `weatherController.js`: Manages weather-related API endpoints.
-*	`models/`: Mongoose schemas and models for MongoDB.
-      + `WeatherData.js`: Schema for current weather data.
-      + `DailySummary.js`: Schema for daily weather summaries.
-      + `ForecastData.js`: Schema for weather forecast data.
-*	`routes/`: Defines API endpoints and associates them with controllers.
-      + `api.js`: Main router file for the API.
-*	`services/`: Business logic and interactions with external APIs.
-      + `dataFetcher.js`: Functions to fetch weather data from external APIs.
-      + `updateSummary.js`: Functions to process and update daily summaries.
-      + `cronJobs.js`: Schedules tasks to fetch data at regular intervals.
-*	`server.js`: Main entry point of the backend application.
-   + Sets up the Express server, connects to MongoDB, initializes middleware, and starts the server.
-   + Imports and starts cron jobs for data fetching.
+- `config/`: Configuration files.
+
+* `cities.js`: Defines the list of cities to monitor with their coordinates.
+
+- `controllers/`: Handles incoming API requests.
+
+* `weatherController.js`: Manages weather-related API endpoints.
+
+- `models/`: Mongoose schemas and models for MongoDB.
+  - `WeatherData.js`: Schema for current weather data.
+  - `DailySummary.js`: Schema for daily weather summaries.
+  - `ForecastData.js`: Schema for weather forecast data.
+- `routes/`: Defines API endpoints and associates them with controllers.
+  - `api.js`: Main router file for the API.
+- `services/`: Business logic and interactions with external APIs.
+  - `dataFetcher.js`: Functions to fetch weather data from external APIs.
+  - `updateSummary.js`: Functions to process and update daily summaries.
+  - `cronJobs.js`: Schedules tasks to fetch data at regular intervals.
+- `server.js`: Main entry point of the backend application.
+
+* Sets up the Express server, connects to MongoDB, initializes middleware, and starts the server.
+* Imports and starts cron jobs for data fetching.
 
 ## Non-Functional Considerations
 
@@ -519,61 +517,77 @@ The frontend expects certain API endpoints to fetch weather data. Ensure that yo
 - **Configurable Parameters**: Make key parameters such as the list of monitored cities and data fetch intervals configurable, allowing the system to adapt to different requirements without code changes.
 - **Database Indexing**: Add indexes to frequently queried fields in MongoDB collections to improve read performance and support scaling to larger datasets.
 
-
 ## Test Cases:
+
 1. System Setup:
+
 ```bash
  -  Verify system starts successfully and connects to the OpenWeatherMap API using a valid API key.
 ```
+
 - Verified the Connection to OpenWeatherMap using a valid API key
+
 2. Data Retrieval:
+
 ```bash
 - Simulate API calls at configurable intervals.
 ```
+
 - Set configurable interval in the frontend for user to set, where it can be in the range of 1 to 59
-``` bash
+
+```bash
 - Ensure the system retrieves weather data for the specified location and parses the response correctly.
 ```
+
 - Right now, the Application retrivies the weather data for metropolitan cities (as the free API from OpenWeatherMap requires Latitute and Longitude Coordinates)
 
-
 3. Temperature Conversion:
-``` bash
+
+```bash
 - Test conversion of temperature values from Kelvin to Celsius (or Fahrenheit) based on user preference.
 ```
+
 - The Temperature retrived from the OpenWeatherMap is already in Celsius, hence gave user preference of choosing between Celsius and Fahrenheit
+
 4. Daily Weather Summary:
- ```bash
+
+```bash
 - Simulate a sequence of weather updates for several days.
 ```
-- I have understood this in a certain way where, first I have created a collection in the database for daily summaries and started storing the temperatures for that day in an array. Fetched them to the frontend presenting the cummulatives  
+
+- I have understood this in a certain way where, first I have created a collection in the database for daily summaries and started storing the temperatures for that day in an array. Fetched them to the frontend presenting the cummulatives
+
 ```bash
 - Verify that daily summaries are calculated correctly, including average, maximum, minimum temperatures,and dominant weather condition.
 ```
+
 - Verfied the all the metrics and the dominant weather condition is also being stored in the database and showing the condition with more count
 
 5. Alerting Thresholds:
+
 ```bash
 - Define and configure user thresholds for temperature or weather conditions.
 ```
+
 - The user by going to the settings page of the application. They can configure both the threshold for the temperature and weather condition
+
 ```bash
 - Simulate weather data exceeding or breaching the thresholds.
 ```
+
 - Successfully simulated the threshold exceeding scenarios
+
 ```bash
 - Verify that alerts are triggered only when a threshold is violated.
 ```
+
 - Verfied them to be correct alerts
 
 ## Bonus
- 
 
 ```bash
 Explore functionalities like weather forecasts retrieval and generating summaries based
 on predicted conditions.
 ```
-- 5 Day Forecast is retrived and displayed in the form of a line graph representing temp, feels_like, humidity, wind speed and generating summaries using gemini ai 
 
-
-
+- 5 Day Forecast is retrived and displayed in the form of a line graph representing temp, feels_like, humidity, wind speed and generating summaries using gemini ai
