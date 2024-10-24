@@ -194,7 +194,7 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
 
       ```env
       OPENWEATHER_API_KEY=95e73333b1f491ae8676b1bb9588274a
-      MONGO_URI=mongodb+srv://realadmin:realadmin@cluster0.p3phjsx.mongodb.net/
+      MONGO_URI=mongodb://localhost:27017
       GEMINI_API_KEY=AIzaSyCHBfiXfzFrehhldrjnWQDbBHkyXZEVXaA
       ```
       ---
@@ -203,7 +203,9 @@ The **Weather Dashboard** is a comprehensive web application that provides real-
 
       ```env
       MONGODB_URI=mongodb+srv://username:passwrod@cluster0.p3phjsx.mongodb.net/
-      OPENWEATHERMAP_API_KEY=your_openweathermap_api_key
+      OPENWEATHER_API_KEY=95e73333b1f491ae8676b1bb9588274a
+      GEMINI_API_KEY=AIzaSyCHBfiXfzFrehhldrjnWQDbBHkyXZEVXaA
+
       ```
 
       - Replace `your_openweathermap_api_key` with your actual OpenWeatherMap API key (get one from [https://openweathermap.org/api](https://openweathermap.org/api)) if not provided in the `.env.example`.
